@@ -21,11 +21,12 @@ class UpdateUserController extends Controller
 
         $authUsersDTO = new AuthUsersDTO();
 
+        $authUsersDTO->setUserId($userId);
         $authUsersDTO->setName($name);
         $authUsersDTO->setEmail($email);
         $authUsersDTO->setPassword($password);
 
-        $this->userRepository->update($authUsersDTO, $userId);
+        $this->userRepository->update($authUsersDTO);
 
         //$userRepository = new EloquentUsersRepository();
         //$userRepository->update($userId, $name, $email, $password);

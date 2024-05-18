@@ -12,7 +12,7 @@ interface UsersRepositoryInterface {
 
     public function list(): Collection;
 
-    public function update(AuthUsersDTO $authUsersDTO, $userId): void;
+    public function update(AuthUsersDTO $authUsersDTO): void;
 
     public function delete($userId): void;
     
