@@ -122,6 +122,7 @@
         <h1>MI PRIMERA TIENDA WEB</h1>
         <div class="user-menu">
             <a href="cart-summary" class="cart-button" aria-label="">Resumen de Compra</a>
+            <a href= "{{ url('store') }}" class="cart-button" aria-label="">Registrar nuevo usuario</a>
             <div class="user-dropdown">
                 <button class="logout-button">
                     <svg width="35" height="35" viewBox="0 0 24 24" fill="none"

@@ -6,6 +6,7 @@
 </head>
 
 <body>
+    <a href= "{{url('home')}}" aria-label=""> Volver al inicio </a>
     <h3> Regresar a la lista de usuarios: 
         <a href= "{{url('users')}}"> Volver al listado </a> </h3>
 

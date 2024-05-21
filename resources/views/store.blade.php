@@ -6,8 +6,9 @@
 </head>
 
 <body>
-    <h3> Regresar a la lista de usuarios: 
-        <a href= "{{url('users')}}"> Volver al listado </a>
+    <a href= "{{url('home')}}" aria-label=""> Volver al inicio </a>
+    <h3> Ir a la lista de usuarios: 
+        <a href= "{{url('users')}}"> Ver listado </a>
     </h3>
     <h1> Registrate con tus datos </h1>
     <form action= "{{ url('create') }}" method= "POST">

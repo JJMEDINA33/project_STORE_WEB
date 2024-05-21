@@ -18,7 +18,7 @@ use App\Http\Controllers\UpdateUserController;
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::get('/', HomeController::class);
 Route::get('home', HomeController::class);
 
 Route::get('users', ViewUsersController::class);

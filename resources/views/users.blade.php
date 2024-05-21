@@ -35,10 +35,10 @@
     .table tbody tr:hover {
     background-color: #f1f1f1;
     }
-    </style>
+   </style>
 
 <body>
-    <a href= "{{ url('store') }}">Registrar nuevo usuario</a>
+    <a href= "{{url('home')}}" aria-label=""> Volver al inicio </a>
     
     <h1>Usuarios</h1>
 
