@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+    
 <head>
     <meta charset= "UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="favicon.ico">
-    <title>Inicio</title>        
+    <title>Inicio</title>
 </head>
 
 <style>
@@ -115,14 +116,17 @@
         padding: 10px 20px; /* Reduce el espacio interno del botón */
         font-size: 14px; /* Reduce el tamaño de la fuente del botón */
     }
+
 </style>
 
 <body>
     <div class="top-bar">
         <h1>MI PRIMERA TIENDA WEB</h1>
         <div class="user-menu">
+            <a href= "{{ url('store') }}" class="cart-button" aria-label="">Registro de Usuarios</a>
+            <a href= "{{ url('login') }}" class="cart-button" aria-label="">Inicio de Sesion</a>
             <a href="cart-summary" class="cart-button" aria-label="">Resumen de Compra</a>
-            <a href= "{{ url('store') }}" class="cart-button" aria-label="">Registrar nuevo usuario</a>
+            
             <div class="user-dropdown">
                 <button class="logout-button">
                     <svg width="35" height="35" viewBox="0 0 24 24" fill="none"
@@ -132,16 +136,23 @@
                         <path d="M2 12.0322C2 11.4799 2.44772 11.0322 3 11.0322H21C21.5523 11.0322 22 11.4799 22 12.0322C22 12.5845 21.5523 13.0322 21 13.0322H3C2.44772 13.0322 2 12.5845 2 12.0322Z"
                               fill="currentColor" />
                         <path d="M3 17.0645C2.44772 17.0645 2 17.5122 2 18.0645C2 18.6167 2.44772 19.0645 3 19.0645H21C21.5523 19.0645 22 18.6167 22 18.0645C22 17.5122 21.5523 17.0645 21 17.0645H3Z"
-                              fill="currentColor" />
-                    </svg>
+                              fill="currentColor" />                         
+                    </svg>                                        
                 </button>
                 <div class="user-dropdown-content">
-                    <form action="{{ url('history') }}" method="POST">@csrf<button class="logout-button smaller-button">Historial de pedidos</button></form>
-                    <form action="{{ url('logout') }}" method="POST">@csrf<button class="logout-button smaller-button">Cerrar Sesión</button></form>
+                    <form action="{{ url('history') }}" method="POST">
+                        @csrf
+                        <button class="logout-button smaller-button">Historial de pedidos</button>
+                    </form>
+                    <form action="{{ url('logout') }}" method="POST">
+                        @csrf
+                        <button class="logout-button smaller-button">Cerrar Sesión</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+    
     <div class="container">
         @forelse ($products as $product)
         <label for="product_{{ $product->id }}" style="border:1px solid #333;padding:5px;display:inline-block">
@@ -172,6 +183,9 @@
         <p>No hay productos en esta tienda, vuelva pronto.</p>
         @endforelse
     </div>
+
+    
+
 </body>
 
 <footer>

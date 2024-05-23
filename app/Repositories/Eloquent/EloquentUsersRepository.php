@@ -47,4 +47,9 @@ class EloquentUsersRepository implements UsersRepositoryInterface {
         
         $user->delete();
     }
+
+    public function findByEmail(string $email):?user
+    {   
+        return User::where('email','=',$email)->firs();
+    }
 }

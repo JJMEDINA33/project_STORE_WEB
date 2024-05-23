@@ -15,5 +15,7 @@ interface UsersRepositoryInterface {
     public function update(AuthUsersDTO $authUsersDTO): void;
 
     public function delete($userId): void;
+
+    public function findByEmail(string $email):?User;
     
 }
