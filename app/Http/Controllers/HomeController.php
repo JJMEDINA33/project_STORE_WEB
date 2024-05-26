@@ -17,13 +17,14 @@ if (Auth::guest()) {
 return redirect()->to('/login');
 }
 */
-$userId = Auth::id();
+//$userId = Auth::id();
 
 $productRepository = new EloquentProductRepository();
 //$cartRepository = new EloquentCartRepository();;
 $products = $productRepository->getAll(['id', 'name', 'price', 'image']);
+
 //$carts = $cartRepository->getUserCart($userId);
-$quantityTotal = 0;
+//$quantityTotal = 0;
 
 //foreach ($carts as $cart) {
 //$quantityTotal += $cart->quantity;
@@ -31,7 +32,7 @@ $quantityTotal = 0;
 
 return view('home', [
 'products' => $products,
-'quantityTotal' => $quantityTotal 
+//'quantityTotal' => $quantityTotal 
 ]);
 }
 }

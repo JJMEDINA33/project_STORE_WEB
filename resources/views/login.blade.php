@@ -1,56 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset= "UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="favicon.ico">
     
     <title>Inicio de Sesion</title>
-
+    <style> 
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #98b5bd81;                    
+            height: 70vh;
+            margin: 0;
+            flex-direction: column;
+        }
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: hsl(166, 72%, 64%);
+            padding: 10px 20px;
+        }
+        .user-menu {
+            display: flex;
+            align-items: center;
+        }
+        .nav-button {
+            background-color: hsl(212, 82%, 57%);
+            color: #ffffff;
+            border: 1px solid #222121;
+            border-radius: 4px;
+            padding: 10px 20px;               
+            margin-right: 20px;        
+        }
+        .login-form {
+            background-color: #ffffffe1;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 280px;
+            text-align: center;
+            border: 1px solid #ccc;
+        }
+        .login-form input[type="text"],
+        .login-form input[type="email"],
+        .login-form input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+        .password-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }        
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            cursor: pointer;
+            user-select: none;
+        }        
+        .login-form button {
+            width: 50%;
+            padding: 10px;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 3px;
+            color: white;
+            cursor: pointer;
+        }
+        .login-form button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 
 <body>
-               
-    <main class="login-form">
-        <div class="cotainer">
-            <div class="row justify-content-center">
-                <div class="col-md-4">
-                    <div class="card">
-                        <h3 class="card-header text-center">Formulario Login</h3>
-                        <div class="card-body">
-                            <form method="POST" action="{{ 'login' }}">
-                                @csrf
-                                <div class="form-group mb-3">
-                                    <input type="text" placeholder="Email" id="email" class="form-control" name="email" required
-                                        autofocus>
-                                    @if ($errors->has('email'))
-                                    <span class="text-danger">{{ $errors->first('email') }}</span>
-                                    @endif
-                                </div>
-                                <div class="form-group mb-3">
-                                    <input type="password" placeholder="Password" id="password" class="form-control" name="password" required>
-                                    @if ($errors->has('password'))
-                                    <span class="text-danger">{{ $errors->first('password') }}</span>
-                                    @endif
-                                </div>
-                                <div class="form-group mb-3">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" name="remember"> Recuerdame
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="d-grid mx-auto">
-                                    <button type="submit" class="btn btn-dark btn-block">Enviar</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+    <header class="top-bar">
+        <a href= "home" class= "nav-button" aria-label=""> Volver al inicio </a>
+        <h1>Inicio de Sesion</h1>
+        <div class= "user-menu">                        
+            <a href= "users" class= "nav-button" aria-label="">Ver listado de Usuarios</a>
+        </div>        
+    </header>
+    <br>
+    <div class="login-form">        
+        <h2>Datos de Ingreso</h2>
+        <form action= "{{ url('auth') }}" method= "POST">
+            @csrf            
+            <label for="email">Correo:</label>
+            <input type="email" id="email" name="email" placeholder="Usuario" required>
+            
+            <label for="password">Contraseña:</label>
+            <div class="password-container">
+                <input type= "password" id= "password" name= "password" placeholder= "Contraseña" required>
+                <span class= "toggle-password" onclick= "togglePasswordVisibility()">👁️</span></div>
+            <button type="submit">Ingresar</button>
+            
+            <div>
+                <h3>Si aun no tienes una cuenta:</h3>                
+                <a href= "store" class= "nav-button" aria-label="">Regístrate</a>
             </div>
-        </div>
-    </main>
+        </form>
+    </div>
+    <script>
+        function togglePasswordVisibility() {
+            var passwordInput = document.getElementById("password");
+            var togglePassword = document.querySelector(".toggle-password");
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                togglePassword.textContent = "🙈";
+            } else {
+                passwordInput.type = "password";
+                togglePassword.textContent = "👁️";
+            }
+        }
+    </script>
 </body>
 </html>
-                            

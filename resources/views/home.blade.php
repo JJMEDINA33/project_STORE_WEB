@@ -11,33 +11,24 @@
 <style>
     body {
         font-family: Arial, sans-serif;
-        background-color: hsl(166, 72%, 64%);
+        background-color: #98b5bd81;                    
+        height: 70vh;
         margin: 0;
-        padding: 0;
-        color: #fff;
+        flex-direction: column;
     }
-
     .top-bar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background-color: hsl(145, 44%, 44%);
-        padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: hsl(166, 72%, 64%);
+            padding: 10px 20px;
     }
-
-    .top-bar h1 {
-        margin: 0;
-        color: #fff;
-        text-align: center;
-    }
-
     .user-menu {
         display: flex;
         align-items: center;
     }
 
-    .cart-button {
-        display: flex;
+    .cart-button {        
         align-items: center;
         background-color: #3cbf86;
         color: #fff;
@@ -49,10 +40,13 @@
         margin-right: 20px;
     }
 
-    .cart-icon {
-        width: 20px;
-        height: 20px;
-        margin-right: 5px;
+    .nav-button {
+        background-color: hsl(212, 82%, 57%);
+        color: #ffffff;
+        border: 1px solid #222121;
+        border-radius: 4px;
+        padding: 10px 20px;               
+        margin-right: 20px;        
     }
 
     .user-dropdown {
@@ -120,12 +114,12 @@
 </style>
 
 <body>
-    <div class="top-bar">
+    <header class="top-bar">
+        <a href= "store" class="nav-button" aria-label="">Registrate</a>
         <h1>MI PRIMERA TIENDA WEB</h1>
-        <div class="user-menu">
-            <a href= "{{ url('store') }}" class="cart-button" aria-label="">Registro de Usuarios</a>
-            <a href= "{{ url('login') }}" class="cart-button" aria-label="">Inicio de Sesion</a>
-            <a href="cart-summary" class="cart-button" aria-label="">Resumen de Compra</a>
+        <div class="user-menu">            
+            <a href= "login" class="nav-button" aria-label="">Inicio de Sesion</a>
+            <a href= "cart-summary" class="nav-button" aria-label="">Resumen de Compra</a>
             
             <div class="user-dropdown">
                 <button class="logout-button">
@@ -151,7 +145,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </header>
     
     <div class="container">
         @forelse ($products as $product)

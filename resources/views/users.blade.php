@@ -7,12 +7,27 @@
 
     <style>
     body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    background-color: #f4f4f4;
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #f4f4f4;
+    }
+    .top-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: hsl(166, 72%, 64%);
+        padding: 10px 20px;
+    }
+    .nav-button {
+        background-color: hsl(212, 82%, 57%);
+        color: #ffffff;
+        border: 1px solid #222121;
+        border-radius: 4px;
+        padding: 10px 20px;               
+        margin-right: 20px;        
     }
     h1 {
-    color: #333;
+        color: #333;
     }
     .table {
     width: 100%;
@@ -38,35 +53,41 @@
    </style>
 
 <body>
-    <a href= "{{url('home')}}" aria-label=""> Volver al inicio </a>
-    
-    <h1>Usuarios</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Correo</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($users as $user)
-            <tr>
-                <td>{{$user->name}}</td>
-                <td>{{$user->email}}</td>
-                <td>
-                    <a href= "{{ url('viewupdate/' . $user->id)}}">Actualizar usuario</a>
-                    <form action= "{{url('delete/' .$user->id)}}" method= "POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type= "submit">Eliminar usuarios</button>
-                    </form>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+    <header class="top-bar">
+        <a href= "home" class= "nav-button" aria-label=""> Volver al inicio </a>
+        <h1>Usuarios Registrados</h1>
+        <div class= "user-menu">
+            <a href= "store" class="nav-button" aria-label="">Registrate</a>
+            <a href= "login" class="nav-button" aria-label="">Inicio de Sesion</a>
+        </div>        
+    </header>    
+    <div>   
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($users as $user)
+                <tr>
+                    <td>{{$user->name}}</td>
+                    <td>{{$user->email}}</td>
+                    <td>
+                        <a href= "{{ url('viewupdate/' . $user->id)}}" >Actualizar usuario</a>
+                        <form action= "{{url('delete/' .$user->id)}}" method= "POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type= "submit">Eliminar usuarios</button>
+                        </form>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+</div>
 </body>
 
 </html>

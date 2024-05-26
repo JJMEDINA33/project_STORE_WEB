@@ -50,6 +50,6 @@ class EloquentUsersRepository implements UsersRepositoryInterface {
 
     public function findByEmail(string $email):?user
     {   
-        return User::where('email','=',$email)->firs();
+        return User::where('email','=',$email)->first();
     }
 }

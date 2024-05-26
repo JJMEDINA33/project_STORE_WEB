@@ -2,35 +2,37 @@
 
 namespace App\Http\Controllers\Auths;
 
-use App\Repositories\Contracts\Users\UsersRepositoryInterface;
+use App\UseCases\UsersValidationUC;
+
 use App\Http\DTOs\AuthUsersDTO;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
-class AuthController
+use App\Http\Controllers\Controller;
+
+class AuthController extends Controller
 {
-    public function __construct(private readonly UsersRepositoryInterface $userRepository)
-    {}
+    private UsersValidationUC $userValidationUC;
+
+    public function __construct(UsersValidationUC $userValidationUC)
+    {
+        $this->userValidationUC = $userValidationUC;
+    }
 
     public function __invoke(Request $request)
     {
         $email = $request->get('email');
         $password = $request->get('password');
 
-        $authUsersDTO = new AuthUsersDTO();
+        $authUserDTO = new AuthUsersDTO();
 
-        $authUsersDTO->setEmail($email);
-        $authUsersDTO->setPassword($password);
-
-        $userOrNull = $this->userRepository->findByEmail($authUsersDTO->getEmail());
-
-
-        if (!is_null($userOrNull) && Hash::check($password, $userOrNull->password)) {
-            Auth::login($userOrNull);
-            return redirect()->to('/home');
+        $authUserDTO->setEmail($email);
+        $authUserDTO->setPassword($password);         
+        
+        if ($this->userValidationUC->validateUser($authUserDTO)) {
+            
+            return redirect()->to('home');
         }
-
+        
         return redirect()->back();
     }
 }

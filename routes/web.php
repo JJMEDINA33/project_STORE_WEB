@@ -12,23 +12,18 @@ use App\Http\Controllers\Front\ViewUpdateController;
 use App\Http\Controllers\UpdateUserController;
 
 
+Route::get('/', function () {return view('welcome');});
 
-
-
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('login', function () {
-    return view('login');
-});
+Route::get('vista-prueba', function () {return view('vista-prueba');});
 
 Route::get('/', HomeController::class);
 Route::get('/home', HomeController::class);
 
 Route::get('store', ViewStoreController::class);
 Route::post('create', CreateUserController::class);
+
+Route::get('login', function () {return view('login');});
+Route::post('auth', AuthController::class);
 
 Route::get('users', ViewUsersController::class);
 
