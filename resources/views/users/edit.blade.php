@@ -6,9 +6,9 @@
 </head>
 
 <body>
-    <a href= "{{url('home')}}" aria-label=""> Volver al inicio </a>
+    <a href= "/home" aria-label=""> Volver al inicio </a>
     <h3> Regresar a la lista de usuarios: 
-        <a href= "{{url('users')}}"> Volver al listado </a> </h3>
+        <a href= "/users"> Volver al listado </a> </h3>
 
     <h1> Actualiza tus datos </h1>
 

@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Repositories\Contracts\Users;
+namespace App\Repositories\Contracts;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use App\Http\DTOs\AuthUsersDTO;
 
-interface UsersRepositoryInterface {
+interface UserRepositoryInterface {
 
-    public function create(AuthUsersDTO $authUsersDTO): void;
+    public function store(AuthUsersDTO $authUsersDTO): void;
 
     public function list(): Collection;
 

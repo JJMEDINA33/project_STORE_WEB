@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\Front;
+namespace App\Http\Controllers\Users;
 
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class ViewUsersController extends Controller
+class ListUsersController extends Controller
 {
     public function __invoke(){
 
         $users = User::all();
 
-        return view('users', ['users'=> $users]);
+        return view('users.list', ['users'=> $users]);
     }
 }

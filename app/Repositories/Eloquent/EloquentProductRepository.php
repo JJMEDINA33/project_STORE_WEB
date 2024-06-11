@@ -4,37 +4,43 @@ namespace App\Repositories\Eloquent;
 
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Collection;
+use App\Repositories\Contracts\ProductRepositoryInterface;
+use App\Http\DTOs\AuthProductsDTO;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class EloquentProductRepository
-{
-    public function store(string $name, string $image, float $price): void
-    {
+class EloquentProductRepository implements ProductRepositoryInterface {
+
+    public function store(AuthProductsDTO $authProductsDTO): void{
         Product::create([
-
-            'name' => $name,
-            'image' => $image,
-            'price' => $price
+            'name' => $authProductsDTO->getName(),
+            'image' => $authProductsDTO->getImage(),
+            'price' => $authProductsDTO->getPrice(),
         ]);
     }
-
-    public function Getall(array $columns): Collection
-    {
-        return Product::all($columns);
+    public function list(): Collection {
+        return Product::all();
     }
+    public function update(AuthProductsDTO $authProductsDTO): void {
 
-    public function update(Product $product, string $name, string $image, float $price): void
-    {
-        $product->name = $name;
-        $product->image = $image;
-        $product->price = $price;
+        $product = Product::find($authProductsDTO->getProductId());
+
+        $product->name = $authProductsDTO->getName();
+        $product->image = $authProductsDTO->getImage();
+        $product->price = $authProductsDTO->getPrice();
+
         $product ->save();
-    }
+    }    
+    public function delete($productId): void {
 
+        $product = Product::Find($productId);
+        
+        if($product){
+            $product->delete();
+        }else{
+        throw new ModelNotFoundException("Product not found with ID: $productId.");
+        }
+    }
     public function findById(int $productId):?product {
         return Product::find($productId);
-    }
-
-    public function delete(int $productId): void{
-        Product::Find($productId)->delete();
     }
 }

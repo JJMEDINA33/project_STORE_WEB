@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Inicio de Sesion</title>
+    <title> Registro </title>
     <style> 
         body {
             font-family: Arial, sans-serif;
@@ -79,30 +79,31 @@
 
 <body>
     <header class="top-bar">
-        <a href= "home" class= "nav-button" aria-label=""> Volver al inicio </a>
-        <h1>Inicio de Sesion</h1>
-        <div class= "user-menu">                        
-            <a href= "users" class= "nav-button" aria-label="">Ver listado de Usuarios</a>
+        <a href= "/home" class="nav-button" aria-label=""> Volver al inicio </a>
+        <h1>Seccion de Registro de Usuarios</h1>
+        <div class= "user-menu">
+            <a href= "/login" class="nav-button" aria-label="">Inicio de Sesion</a>
+            <a href= "{{url('users')}}" class="nav-button" aria-label="">Ver listado de Usuarios</a>
         </div>        
     </header>
     <br>
     <div class="login-form">        
-        <h2>Datos de Ingreso</h2>
-        <form action= "{{ url('auth') }}" method= "POST">
-            @csrf            
+        <h1> Registrate con tus datos </h1>
+        <form action= "{{ url('users/store') }}" method= "POST">
+            @csrf
+            <label for="name">Nombre</label>
+            <input type="text" id="name" name="name" placeholder="Nombre" required>
+            
             <label for="email">Correo:</label>
             <input type="email" id="email" name="email" placeholder="Usuario" required>
             
             <label for="password">Contraseña:</label>
             <div class="password-container">
                 <input type= "password" id= "password" name= "password" placeholder= "Contraseña" required>
-                <span class= "toggle-password" onclick= "togglePasswordVisibility()">👁️</span></div>
-            <button type="submit">Ingresar</button>
-            
-            <div>
-                <h3>Si aun no tienes una cuenta:</h3>                
-                <a href= "store" class= "nav-button" aria-label="">Regístrate</a>
+                <span class= "toggle-password" onclick= "togglePasswordVisibility()">👁️</span>
             </div>
+
+            <button type="submit"> Guardar usuario </button>
         </form>
     </div>
     <script>
@@ -119,4 +120,5 @@
         }
     </script>
 </body>
+
 </html>

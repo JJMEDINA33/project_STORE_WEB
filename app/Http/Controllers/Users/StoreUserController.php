@@ -1,17 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
-    
-use App\Models\User;
+namespace App\Http\Controllers\Users;
+
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\DTOs\AuthUsersDTO;
-//use Illuminate\Support\Facades\Hash;
-//use App\Repositories\EloquentUsersRepository;
-use App\Repositories\Contracts\Users\UsersRepositoryInterface;
+use App\Repositories\Contracts\UserRepositoryInterface;
 
-class CreateUserController extends Controller
-{
-    public function __construct(private readonly UsersRepositoryInterface $userRepository)
+class StoreUserController extends Controller {
+       
+    public function __construct(private readonly UserRepositoryInterface $userRepository)
     {}
 
     public function __invoke(Request $request){
@@ -26,10 +24,10 @@ class CreateUserController extends Controller
         $authUsersDTO->setName($name);
         $authUsersDTO->setEmail($email);
         $authUsersDTO->setPassword($password);
+        //Cuando implementamos DTOs.
+        $this->userRepository->store($authUsersDTO);
 
-        $this->userRepository->create($authUsersDTO);
-
-        // CUANDO HACEMOS EL LLAMADO A TRAVES DE UN CONTRATO.
+        // CUANDO HACEMOS EL LLAMADO A TRAVES DE UN CONTRATO (sin implementar DTOs).
         //$this->userRepository->create($name, $email, $password);
         
         // CUANDO HACEMOS EL LLAMADO DIRECTAMENTE DEL REPOSITORIO.
@@ -39,6 +37,6 @@ class CreateUserController extends Controller
         // PARA TRABAJAR A NIVEL API.
         //return response()->json('Usuario registrado exitosamente.');
         // PARA EJECUTAR A NIVEL WEB.
-        return view('store');
+        return view('users.create');
     }
 }

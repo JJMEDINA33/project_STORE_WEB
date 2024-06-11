@@ -30,7 +30,7 @@ class AuthController extends Controller
         
         if ($this->userValidationUC->validateUser($authUserDTO)) {
             
-            return redirect()->to('home');
+            return redirect()->to('/home');
         }
         
         return redirect()->back();

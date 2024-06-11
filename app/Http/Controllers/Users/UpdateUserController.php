@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Users;
 
-use App\Models\User;
-use App\Repositories\Contracts\Users\UsersRepositoryInterface;
-use App\Repositories\EloquentUsersRepository;
+use App\Http\Controllers\Controller;
+use App\Repositories\Contracts\UserRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Http\DTOs\AuthUsersDTO;
 
-class UpdateUserController extends Controller
-{
-    public function __construct(private readonly UsersRepositoryInterface $userRepository)
+class UpdateUserController extends Controller {
+    
+    public function __construct(private readonly UserRepositoryInterface $userRepository)
     {}
 
     public function __invoke(Request $request, int $userId) {

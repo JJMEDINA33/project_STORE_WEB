@@ -115,7 +115,7 @@
 
 <body>
     <header class="top-bar">
-        <a href= "store" class="nav-button" aria-label="">Registrate</a>
+        <a href= "users/create" class="nav-button" aria-label="">Registrate</a>
         <h1>MI PRIMERA TIENDA WEB</h1>
         <div class="user-menu">            
             <a href= "login" class="nav-button" aria-label="">Inicio de Sesion</a>
@@ -138,12 +138,13 @@
                         @csrf
                         <button class="logout-button smaller-button">Historial de pedidos</button>
                     </form>
-                    <form action="{{ url('logout') }}" method="POST">
+                    <form action="{{ url('logout') }}" method="GET">
                         @csrf
                         <button class="logout-button smaller-button">Cerrar Sesión</button>
                     </form>
                 </div>
             </div>
+            <a href= "products" class="nav-button" aria-label="">Registro de Productos</a>
         </div>
     </header>
     

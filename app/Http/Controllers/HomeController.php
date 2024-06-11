@@ -9,30 +9,25 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-  
-public function __invoke()
-{
-/*    
-if (Auth::guest()) {
-return redirect()->to('/login');
-}
-*/
-//$userId = Auth::id();
 
-$productRepository = new EloquentProductRepository();
-//$cartRepository = new EloquentCartRepository();;
-$products = $productRepository->getAll(['id', 'name', 'price', 'image']);
+    public function __invoke()
+    {
+        //$userId = Auth::id();
 
-//$carts = $cartRepository->getUserCart($userId);
-//$quantityTotal = 0;
+        $productRepository = new EloquentProductRepository();
+        //$cartRepository = new EloquentCartRepository();;
+        $products = $productRepository->list(['id', 'name', 'price', 'image']);
 
-//foreach ($carts as $cart) {
-//$quantityTotal += $cart->quantity;
-//}
+        //$carts = $cartRepository->getUserCart($userId);
+        //$quantityTotal = 0;
 
-return view('home', [
-'products' => $products,
-//'quantityTotal' => $quantityTotal 
-]);
-}
+        //foreach ($carts as $cart) {
+        //$quantityTotal += $cart->quantity;
+        //}
+
+        return view('home', [
+            'products' => $products,
+            //'quantityTotal' => $quantityTotal 
+        ]);
+    }
 }
