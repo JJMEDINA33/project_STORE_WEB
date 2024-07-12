@@ -28,7 +28,7 @@ class StoreUserController extends Controller {
         $this->userRepository->store($authUsersDTO);
 
         // CUANDO HACEMOS EL LLAMADO A TRAVES DE UN CONTRATO (sin implementar DTOs).
-        //$this->userRepository->create($name, $email, $password);
+        //$this->userRepository->store($name, $email, $password);
         
         // CUANDO HACEMOS EL LLAMADO DIRECTAMENTE DEL REPOSITORIO.
         //$userRepository = new EloquentUsersRepository;

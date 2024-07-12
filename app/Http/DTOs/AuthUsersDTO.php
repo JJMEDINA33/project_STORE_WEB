@@ -3,7 +3,7 @@ namespace App\Http\DTOs;
 
 class AuthUsersDTO
 {
-    private string $userId;
+    private int $userId;
     
     private string $name;
 
@@ -16,7 +16,7 @@ class AuthUsersDTO
         return $this->userId;
     }
 
-    public function setUserId(string $userId)
+    public function setUserId(int $userId)
     {
         $this->userId = $userId;
     }

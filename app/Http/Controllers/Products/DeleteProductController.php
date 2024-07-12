@@ -14,6 +14,6 @@ class DeleteProductController extends Controller
 
         $this->productRepository->delete($productId);
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Producto eliminado.');
     }
 }

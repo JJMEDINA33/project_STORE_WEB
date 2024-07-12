@@ -2,7 +2,8 @@
 namespace App\UseCases;
 
 class SearchIntegerUC {
-    public function execute(){
+    public function execute()
+    {
         
     }
 }

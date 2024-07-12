@@ -34,37 +34,31 @@
         }
         .login-form {
             background-color: #ffffffe1;
-            padding: 20px;
-            border-radius: 5px;
+            padding: 7px;
+            border-radius: 100px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            width: 280px;
+            width: 100%;
             text-align: center;
             border: 1px solid #ccc;
+            display: flex;
+            justify-content: center;
         }
-        .login-form input[type="text"],
-        .login-form input[type="email"],
-        .login-form input[type="password"] {
+        .login-form form {
+            display: flex;
+            align-items: center;
             width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
+        }
+        .login-form input[type="text"] {
+            width: 250px;
+            padding: 7px;
+            margin-right: 10px;
             border: 1px solid #ccc;
             border-radius: 3px;
             box-sizing: border-box;
+            font-size: 15px;
         }
-        .password-container {
-            position: relative;
-            display: flex;
-            align-items: center;
-        }        
-        .toggle-password {
-            position: absolute;
-            right: 10px;
-            cursor: pointer;
-            user-select: none;
-        }        
         .login-form button {
-            width: 50%;
-            padding: 10px;
+            padding: 5px;
             background-color: #007BFF;
             border: none;
             border-radius: 3px;
@@ -73,6 +67,22 @@
         }
         .login-form button:hover {
             background-color: #0056b3;
+        }
+        .alert {
+            padding: 5px;
+            background-color: #4CAF50; /* Green */
+            color: white;
+            margin-bottom: 5px;
+        }
+        .closebtn {
+            margin-left: 5px;
+            color: white;
+            font-weight: bold;
+            float: right;
+            font-size: 15px;
+            line-height: 20px;
+            cursor: pointer;
+            transition: 0.3s;
         }
         .table {
             width: 100%;
@@ -97,26 +107,42 @@
 
 <body>
     <header class="top-bar">
-        <a href= "/home" class="nav-button" aria-label=""> Volver al inicio </a>
-        <h1>Seccion de Registro de Productos</h1>        
-        <a href= "/home" class="nav-button" aria-label=""> Volver al inicio </a>              
+        <a href="/home" class="nav-button" aria-label=""> Volver al inicio </a>
+        <h1>Sección de Registro de Productos</h1>        
+        <a href="/home" class="nav-button" aria-label=""> Volver al inicio </a>              
     </header>
     <br>
     <div class="login-form">        
-        <h1>Registra los Productos</h1>
-        <form action= "{{ url('product/store') }}" method= "POST">
+        <form action="{{ isset($product) ? url('products/update/'.$product->id) : url('product/store') }}" method="POST">
             @csrf
-            <label for="name">Nombre:</label>
-            <input type="text" id="name" name="name" placeholder="Nombre del Producto" required>
-            
-            <label for="image">Imagen:</label>
-            <input type="text" id="image" name="image" placeholder="Imagen" required>
-            
-            <label for="int">Precio:</label>           
-            <input type= "text" id= "price" name= "price" placeholder= "Precio" required>
-            
-            <button type="submit">Guardar Producto</button>
+            @if(isset($product))
+                @method('PUT')
+            @endif
+            <div>
+                <label for="name">Nombre:</label>
+                <input type="text" id="name" name="name" placeholder="Nombre del Producto" value="{{$product->name ?? ''}}" required>
+            </div>
+            <div>
+                <label for="image">Imagen:</label>
+                <input type="text" id="image" name="image" placeholder="URL de la Imagen" value="{{$product->image ?? ''}}" required>
+            </div>
+            <div>
+                <label for="price">Precio:</label>           
+                <input type="text" id="price" name="price" placeholder="Precio (sin puntos)" value="{{$product->price ?? ''}}" required>
+            </div>
+            <div>
+                <button type="submit">{{ isset($product) ? 'Actializar' : 'Guardar'}}</button>
+            </div>
         </form>
+        <div>
+            <!-- Mostrar mensajes flash -->
+        @if(session('success'))
+        <div class="alert horizontal" >
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">⚠️Cerrar</span>
+            {{ session('success') }}
+        </div>
+        @endif
+        </div>
     </div>
     <div>   
         <table class="table">
@@ -125,8 +151,8 @@
                     <th>Nombre</th>
                     <th>Imagen</th>
                     <th>Precio</th>
-                    <th>Actalizacion</th>
-                    <th>Eliminacion</th>
+                    <th>Actualización</th>
+                    <th>Eliminación</th>
                 </tr>
             </thead>
             <tbody>
@@ -136,13 +162,13 @@
                     <td>{{$product->image}}</td>
                     <td>{{$product->price}}</td>
                     <td>
-                        <a href= "{{ url('product/edit/' . $product->id)}}" >Actualizar Producto</a>                        
+                        <a href="{{ url('products/'. $product->id) }}">Actualizar Producto</a>                        
                     </td>
                     <td>
-                        <form action= "{{url('product/delete/' .$product->id)}}" method= "POST">
+                        <form action="{{ url('products/delete/' . $product->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type= "submit">Eliminar Producto</button>
+                            <button type="submit">Eliminar Producto</button>
                         </form>
                     </td>
                 </tr>
@@ -151,5 +177,4 @@
         </table>
     </div>
 </body>
-
 </html>

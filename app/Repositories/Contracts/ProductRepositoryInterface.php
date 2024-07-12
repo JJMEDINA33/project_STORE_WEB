@@ -13,6 +13,5 @@ interface ProductRepositoryInterface {
 
     public function update(AuthProductsDTO $authProductsDTO): void;
 
-    public function delete($productId): void;
-    
+    public function delete($productId): void;    
 }

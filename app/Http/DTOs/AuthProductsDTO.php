@@ -3,7 +3,7 @@ namespace App\Http\DTOs;
 
 class AuthProductsDTO {
 
-    private string $productId;    
+    private int $productId;    
     private string $name;
     private string $image;
     private string $price;
